@@ -14,22 +14,30 @@ Welcome to my guide on BitBurner where we go from zero knowledge on JavaScript (
 Now, if we covered all of JavaScript then this would be a web development course, not a guide on BitBurner. As such, we'll be focusing on the basic concepts that you'll need to understand everything that ***you*** create to make a fully functional hacking script. Or at least to cover everything (Along with the downsides) that the game's given basic-hack-template script has. (Almost) All lines in JavaScript should end in a semicolon (;), The exception to this is anything with Curly braces ({ }).
 
 ## Variables
-JavaScript is, at its core, ~~an object oriented language~~ a language where every type is technically an object. If you've ever seen a JSON file (Which stands for JavaScript Object Notation btw) or the syntax for JSON then you'll know what actual *objects* are like in JavaScript.
-### Variable Types
-In JavaScript there are many different Types. Each type has its quirk, and in all honesty in types aren't all that important with BitBurner JavaScript. If you choose to later migrate to [TypeScript](#typescript) then types are very important (I wonder where the name comes from) and WILL throw errors if incorrect types are used.
-#### Null
-#### Undefined
-#### Boolean
-#### Number
-#### BigInt
-#### String
-#### Symbol
-
-### Defining Variables
-In JavaScript there's ~~2~~ 3 different ways to *define* variables. When you define a variable you are essentially taking a particular section of memory and saying "You! Remember that you are containing this data!" so that you can use it at a later time.
-#### Const
-Const, the vanilla of variable defining. Bland, Boring, and Basic. You define the variable, and that is it. For any data type not resulting from some formula with a changing result, no different than spamming the same boolean or string in place of the variable.
+In JavaScript, there's 4 major parts to every variable
+* Declaring
+* Assigning
+* Scope
+* Types
+### Declaring
+Declaring a variable is the actual process of *creating* it, until a variable is declared using one of the 3 key words (`const`, `let`, `var`) it can't be used. When a variable is declared it is *initialized* (Initially created) with the value `undefined` (More on `undefined` in [Types](#types))
+* Const.
+ Immutable, cannot be changed after declaration. Intended for things you know you will use throughout the code but won't ever be changed. Conforms to [Block Scope](#block-scope).
+* Let.
+ Mutable, can be changed after declaration. Intended for defaulting to one value then changing it later depending on a condition or if a variable in general needs updating. Conforms to [Block Scope](#block-scope).
+* Var.
+ Mutable, can be changed after declaration. DEPRECATED AND SHOULD NOT BE USED. Mostly the same as `let`. Conforms to [Function Scope](#function-scope).
 ```js
-const constant = `Hello World!`;
-
+const x; // This is invalid syntax, more on this later.
 ```
+```js
+let x;
+```
+```js
+var x;
+```
+### Assigning
+Assigning a variable is what actually gives/changes a variable's data. This is done by putting an equals sign (=) after the variable's name, then after the equals sign sets the value of the variable to that.
+
+# NOTE
+This guide is incomplete, I am trying to get this finished within a reasonable amount of time (aka before I jump ship and get bored with this). Current focus is [Variables](#variables), after that I will focus on [Functions](#functions)
