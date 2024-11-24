@@ -26,32 +26,42 @@ Declaring a variable is the actual process of *creating* it, until a variable is
 * Let.
  Mutable, can be changed after declaration. Intended for defaulting to one value then changing it later depending on a condition or if a variable in general needs updating. Conforms to [Block Scope](#block-scope).
 * Var.
- Mutable, can be changed after declaration. DEPRECATED AND SHOULD NOT BE USED, but will still be shown in this section for the reason of knowing how older code works. Mostly the same as `let`. Conforms to [Function Scope](#function-scope).
+ Should NEVER be used unless you know exactly what you're doing and why. Many people will instantly correct your usage of `var` to `let` when you ask for help. Mutable like `let` is, and conforms to [Function Scope](#function-scope). It's such bad practice to use, unless you know what you're doing, that `var` will not be covered for the rest of this guide. DO NOT USE!!!
 ```js
-const x; // This is invalid syntax, more on this later.
+const x; // This is invalid syntax, more on this in the next section.
 ```
 ```js
 let x;
-```
-```js
-var x;
 ```
 ### Assigning
 Assigning a variable is what actually gives/changes a variable's data. This is done by putting an equals sign (=) after the variable's name, then after the equals sign sets the value of the variable to that.
 ```js
 const x = "Hello World!";
 ```
-Note: Although `let` and `var` can be split as shown below `const` variables MUST be in one line
+Note: Although `let` can be split as shown below `const` variables MUST be in one line
 ```js
 let x;
 x = "Hello World!";
 ```
-```js
-var x;
-x = "Hello World!";
-```
 Something almost everyone does is combine the declaration and assignment into a single line, like is done with `const`.
 ### Scope
-In JavaScript (As well as most other languages, I understand) one thing you have to worry about with variables is scope. If you've ever seen a permission/social status/heierarchy pyramid it's a lot like those (But reversed). The scope level of a variable is determined by where it is defined... TBC
-# NOTE
-This guide is incomplete, I am trying to get this finished within a reasonable amount of time (aka before I jump ship and get bored with this). Current focus is finishing Scope, and doing a quick explanation for Types (Will be focused on in the TS Migration portion) in [Variables](#variables), after that I will focus on [Functions](#functions)
+In JavaScript, as well as most languages, such a thing exists called Scope. This referrs to where things that are declared can and can't be used, and is usually defined as each set of `{ }` being a "block." Code inside of a block can use any variables, classes, functions, and so on which are declared in a higher block or in the current block, given it has been created. However anything in lower blocks cannot be accessed from a block higher than that.
+
+Perhaps this is slightly confusing, here's an example of scope.
+```js
+export async function main() {
+ const msg = "Hello World!";
+ if (msg === "Hello World!") {
+  let foo = 1;
+  console.log(foo); // Prints 1 to the console
+  console.log(msg); // Prints the string "Hello World!" to the console.
+ }
+ console.log(msg); // Prints the string again to the console
+ foo = 2; // Throws an error saying foo is undefined, this is because foo is in a lower block scope than here and cannot be accessed from here.
+ console.log(foo); // Code is never reached, but if it was run it would throw an error because of foo being undefined
+}
+```
+What we first do is we define a new variable, msg, and initialize it with the value `"Hello World!"` This is a `const` variable and cannot be changed later, if we attempted to reassign a value to it (Such as `msg = "I've been changed..."`) it would throw an error. Then we check to see if the value of `msg` is equal to `"Hello World!"`, which it is. This runs the code inside of the pair of curly braces, which is a new block level.
+Inside of this new block level, we declare the variable `foo` and initialize it with a value of `1`. After that we print the value of `foo` to the console, then print the value of `msg` to the console. Now we have exited the scope of the if function and the variable `foo` disappears. We print the value of `msg` to the console again, and then we try to assign a value of `2` to the variable `foo`. Because `foo` has in essence disappeared an error is thrown saying that `foo` is undefined, because it literally is not in the scope.
+## If statements
+If statements are an extremely powerful, versetile, and useful tool in every programming language. They allow you to not just carry out a set of instructions, but add logic to your code.
